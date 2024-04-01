@@ -1,9 +1,9 @@
+import { Center } from "@gluestack-ui/themed";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 //props 參數 從json檔匯入
-const Header = (props) => {
-    const title = props.title
+const Header = ({ title }) => {
     return (
         <View style={styles.headerStyle}>
             <Text style={styles.textstyle}>{title}</Text>
@@ -13,7 +13,7 @@ const Header = (props) => {
 
 const styles = StyleSheet.create({
     headerStyle: {
-        backgroundColor: "F8F8F8",
+        backgroundColor: "yellow",
         justifyContent: "center",
         alignContent: "center",
         height: 60,
@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
     },
     textstyle: {
         fontSize: 20,
+        color: "red",
+        fontWeight: "bold",
+        textAlign: "center" //文字水平置中
     }
 });
 
