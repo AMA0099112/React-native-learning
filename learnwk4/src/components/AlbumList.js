@@ -3,22 +3,23 @@ import { StyleSheet, Text, View, Image, ScrollView, FlatList } from "react-nativ
 import albumData from "../json/albums";
 
 const Albumlist = () => {
+    const renderItem = ({ item }) =>
+        <View>
+            <Text>{item.title}</Text>
+            <Text>{item.artist}</Text>
+            <Image
+                style={{ width: 300, height: 300 }}
+                source={{
+                    uri: item.image
+                }}
+            />
+        </View>
     return (
         <FlatList
             data={albumData.albumList}
-            renderItem={({ item }) =>
-                <View>
-                    <Text>{item.title}</Text>
-                    <Text>{item.artist}</Text>
-                    <Image
-                        style={{ width: 300, height: 300 }}
-                        source={{
-                            uri: item.image
-                        }}
-                    />
-                </View>
+            renderItem={renderItem}
 
-            }
+
             keyExtractor={item => item.title}
         />
     );
