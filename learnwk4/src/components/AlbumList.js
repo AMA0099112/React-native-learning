@@ -1,77 +1,26 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, ScrollView } from "react-native";
+import { StyleSheet, Text, View, Image, ScrollView, FlatList } from "react-native";
 import albumData from "../json/albums";
 
 const Albumlist = () => {
     return (
-        <ScrollView>
-            <View style={styles.cardContainerStyle}>
-                <View style={[styles.thumbnailContainerStyle, styles.cardSectionStyle]}>
+        <FlatList
+            data={albumData.albumList}
+            renderItem={({ item }) =>
+                <View>
+                    <Text>{item.title}</Text>
+                    <Text>{item.artist}</Text>
                     <Image
-                        style={styles.thumbnailStyle}
+                        style={{ width: 300, height: 300 }}
                         source={{
-                            uri: albumData.albumList[0].thumbnail_image
-                        }}
-                    />
-                    <View style={styles.headerContentStyle}>
-                        <Text>{albumData.albumList[0].title}</Text>
-                        <Text>{albumData.albumList[0].artist}</Text>
-                    </View>
-                </View>
-                <View style={styles.cardSectionStyle}>
-                    <Image
-                        style={styles.imageStyle}
-                        source={{
-                            uri: albumData.albumList[0].image
+                            uri: item.image
                         }}
                     />
                 </View>
-            </View>
-            <View style={styles.cardContainerStyle}>
-                <View style={[styles.thumbnailContainerStyle, styles.cardSectionStyle]}>
-                    <Image
-                        style={styles.thumbnailStyle}
-                        source={{
-                            uri: albumData.albumList[1].thumbnail_image
-                        }}
-                    />
-                    <View style={styles.headerContentStyle}>
-                        <Text>{albumData.albumList[1].title}</Text>
-                        <Text>{albumData.albumList[1].artist}</Text>
-                    </View>
-                </View>
-                <View style={styles.cardSectionStyle}>
-                    <Image
-                        style={styles.imageStyle}
-                        source={{
-                            uri: albumData.albumList[1].image
-                        }}
-                    />
-                </View>
-            </View>
-            <View style={styles.cardContainerStyle}>
-                <View style={[styles.thumbnailContainerStyle, styles.cardSectionStyle]}>
-                    <Image
-                        style={styles.thumbnailStyle}
-                        source={{
-                            uri: albumData.albumList[2].thumbnail_image
-                        }}
-                    />
-                    <View style={styles.headerContentStyle}>
-                        <Text>{albumData.albumList[2].title}</Text>
-                        <Text>{albumData.albumList[2].artist}</Text>
-                    </View>
-                </View>
-                <View style={styles.cardSectionStyle}>
-                    <Image
-                        style={styles.imageStyle}
-                        source={{
-                            uri: albumData.albumList[2].image
-                        }}
-                    />
-                </View>
-            </View>
-        </ScrollView>
+
+            }
+            keyExtractor={item => item.title}
+        />
     );
 };
 

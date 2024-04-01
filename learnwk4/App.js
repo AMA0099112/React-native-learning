@@ -10,11 +10,7 @@ const App = () => {
     <SafeAreaView flex={1}>
       <StatusBar />
       <Header title={albumData.albumTitle} />
-      <FlatList
-        data={albumData.albumList}
-        renderItem={({ item }) => <Text>{item.title}</Text>}
-        keyExtractor={item => item.title}
-      />
+      <Albumlist />
     </SafeAreaView>
   )
 }
