@@ -5,13 +5,14 @@ import albumData from "./src/json/albums.json";
 import { SafeAreaView, StatusBar, Text } from "react-native";
 import { FlatList } from "@gluestack-ui/themed";
 import album_section from "./src/json/album_section.json"
+import Navigation from "./src/navigation";
 
 const App = () => {
   return (
     <SafeAreaView flex={1}>
       <StatusBar />
       <Header title={albumData.albumTitle} />
-      <Albumlist aaa={album_section} />
+      <Navigation />
     </SafeAreaView>
   )
 }

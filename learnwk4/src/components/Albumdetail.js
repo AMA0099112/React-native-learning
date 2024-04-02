@@ -1,8 +1,8 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, Button, Linking, Pressable } from "react-native";
 
-const AlbumDetail = props => {
-    let { album } = props;
+const AlbumDetail = ({ album, navigation }) => {
+
     return (
         <View style={styles.cardContainerStyle}>
             <View style={[styles.thumbnailContainerStyle,
@@ -17,12 +17,14 @@ const AlbumDetail = props => {
                     <Text>{album.artist}</Text>
                 </View>
             </View>
-            <View style={styles.cardSectionStyle}><Pressable
-                onPress={() => Linking.openURL(album.url)}>
-                <Image
-                    style={styles.imageStyle}
-                    source={{ uri: album.image }}
-                /></Pressable>
+            <View style={styles.cardSectionStyle}>
+                <Pressable
+                    onPress={() => navigation.navigate('Detail', album)}>
+                    <Image
+                        style={styles.imageStyle}
+                        source={{ uri: album.image }}
+                    />
+                </Pressable>
 
             </View>
 

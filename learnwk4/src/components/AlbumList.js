@@ -4,7 +4,7 @@ import sections from "../json/album_section.json";
 import AlbumDetail from "./Albumdetail";
 import HotAlbumDetail from "./HotAlbumDetail";
 
-const Albumlist = () => {
+const Albumlist = ({ navigation }) => {
     const renderSectionHeader = ({ section }) => (
         <>
             <Text style={styles.sectionHeader}>{section.title}</Text>
@@ -24,7 +24,7 @@ const Albumlist = () => {
         if (section.horizontal) {
             return null;
         }
-        return <AlbumDetail album={item} />
+        return <AlbumDetail album={item} navigation={navigation} />
     }
     // const renderItem = () => null;
 
