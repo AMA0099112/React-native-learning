@@ -11,7 +11,7 @@ const AlbumScreen = ({ navigation }) => {
                 navigation={navigation}
             />
         </View>
-    )
-}
+    );
+};
 
 export default AlbumScreen;

@@ -1,24 +1,78 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from 'react';
+import { StyleSheet, ScrollView, Text, View, Image, Button, Linking } from 'react-native';
 
-const DetailScreen = ({ navigation }) => {
+const DetailScreen = ({ route }) => {
+    const { title,
+        artist,
+        url,
+        image,
+        description, price
+    } = route.params;
     return (
-        <View style={styles.container}>
-            <Text style={styles.textStyle}>This is Page 2</Text>
-        </View>
-    )
+        <ScrollView>
+            <View>
+                <Image
+                    style={styles.imageStyle}
+                    source={{
+                        uri: image
+                    }}
+                />
+            </View>
+            <View style={styles.cardContainerStyle}>
+                <Text style={styles.discountStyle} >Discount Now!</Text>
+                <Text style={styles.priceStyle} >Price: ${price}</Text>
+                <Button
+                    onPress={() => Linking.openURL(url)}
+                    title="Buy Now !"
+                />
+            </View>
+            <View style={styles.cardContainerStyle}>
+                <Text>
+                    <Text style={{ fontWeight: 'bold' }}>Artist: </Text>
+                    {artist}
+                </Text>
+                <Text>
+                    <Text style={{ fontWeight: 'bold' }}>Title: </Text>
+                    {title}
+                </Text>
+                <Text>
+                    <Text style={{ marginTop: 15, fontWeight: 'bold' }}>Descriptions:</Text>
+                    <Text style={{ lineHeight: 18 }}>{'\t'}{description}</Text>
+                </Text>
+
+            </View>
+        </ScrollView>
+    );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'fff',
+        backgroundColor: '#fff',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
-    textStyle: {
-        fontSize: 40,
+    imageStyle: {
+        height: 200,
+        width: null
+    },
+    cardContainerStyle: {
+        backgroundColor: '#fff',
+        padding: 10,
+        marginHorizontal: 10,
+        marginTop: 10
+    },
+    discountStyle: {
+        color: '#6099E4',
+        textAlign: 'center',
+        fontSize: 25,
         fontWeight: 'bold'
+    },
+    priceStyle: {
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontSize: 40,
+        marginVertical: 20,
     }
 });
 
