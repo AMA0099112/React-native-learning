@@ -1,25 +1,39 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, ScrollView, FlatList } from "react-native";
-import albumData from "../json/albums";
+import { StyleSheet, Text, View, Image, ScrollView, FlatList, SectionList } from "react-native";
+import section from "../json/album_section.json";
+import AlbumDetail from "./Albumdetail";
 
 const Albumlist = () => {
-    const renderItem = ({ item }) =>
-        <View>
-            <Text>{item.title}</Text>
-            <Text>{item.artist}</Text>
-            <Image
-                style={{ width: 300, height: 300 }}
-                source={{
-                    uri: item.image
-                }}
-            />
-        </View>
+    const renderSectionHeader = ({ section }) => (
+        <>
+            <Text style={styles.sectionHeader}>{section.title}</Text>
+            {section.horizontal ? (
+                <FlatList
+                    horizontal={true}
+                    data={section.data}
+                    renderItem={(item) => <AlbumDetail album={item} />}
+                    keyExtractor={item => item.title}
+                />
+            ) : null}
+
+        </>
+    );
+
+    const renderItem = ({ item, section }) => {
+        if (section.horizontal) {
+            return null;
+        }
+        return <AlbumDetail album={item} />
+    }
+
     return (
-        <FlatList
-            data={albumData.albumList}
+        <SectionList
+            sections={section}
+            contentContainerStyle={{ paddingHorizontal: 10 }}
+            stickySectionHeadersEnabled={false}
+            showsHorizontalScrollIndicator={false}
+            renderSectionHeader={renderSectionHeader}
             renderItem={renderItem}
-
-
             keyExtractor={item => item.title}
         />
     );
