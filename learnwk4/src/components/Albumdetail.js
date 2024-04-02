@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Button, Linking } from "react-native";
 
 const AlbumDetail = props => {
     let { album } = props;
@@ -22,6 +22,12 @@ const AlbumDetail = props => {
                     source={{ uri: album.image }}
                 />
             </View>
+            <Button
+                onPress={() => Linking.openURL(album.url)}
+                title="More Detail"
+                color="gray"
+            />
+
         </View>
     )
 };
