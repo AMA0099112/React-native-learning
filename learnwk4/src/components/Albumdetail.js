@@ -1,8 +1,9 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, View, Image, Button, Linking, Pressable } from "react-native";
 
-const AlbumDetail = ({ album, navigation }) => {
-
+const AlbumDetail = ({ album }) => {
+    const { navigate } = useNavigation();
     return (
         <View style={styles.cardContainerStyle}>
             <View style={[styles.thumbnailContainerStyle,
@@ -19,7 +20,7 @@ const AlbumDetail = ({ album, navigation }) => {
             </View>
             <View style={styles.cardSectionStyle}>
                 <Pressable
-                    onPress={() => navigation.navigate('Detail', album)}>
+                    onPress={() => navigate('Detail', album)}>
                     <Image
                         style={styles.imageStyle}
                         source={{ uri: album.image }}
