@@ -1,23 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { StyleSheet, Text, View, Image, Button, Linking, Pressable } from "react-native";
+import { StyleSheet, Text, View, Image, Pressable } from "react-native";
+import Star from "../components/star"
 
 const AlbumDetail = ({ album }) => {
     const { navigate } = useNavigation();
     return (
         <View style={styles.cardContainerStyle}>
-            <View style={[styles.thumbnailContainerStyle,
-            styles.cardSectionStyle]}>
-
-                <Image
-                    style={styles.thumbnailStyle}
-                    source={{ uri: album.thumbnail_image }}
-                />
-                <View style={styles.headerContentStyle}>
-                    <Text>{album.title}</Text>
-                    <Text>{album.artist}</Text>
-                </View>
-            </View>
             <View style={styles.cardSectionStyle}>
                 <Pressable
                     onPress={() => navigate('Detail', album)}>
@@ -28,49 +17,42 @@ const AlbumDetail = ({ album }) => {
                 </Pressable>
 
             </View>
-
-
+            <View style={styles.headerContentStyle}>
+                {album.star > 0 ? <Star star={album.star} /> : null}
+                <Text style={styles.title}>{album.title}</Text>
+                <Text style={styles.artist}>{album.artist}</Text>
+            </View>
         </View>
     )
 };
 
 const styles = StyleSheet.create({
-    thumbnailContainerStyle: {
-        flexDirection: "row",
-        justifyContent: "flex-start"
-    },
-    thumbnailStyle: {
-        height: 50,
-        width: 50,
-        margin: 5
-    },
     headerContentStyle: {
         flexDirection: "column",
         justifyContent: "space-around",
-        paddingLeft: 10
+
     },
     cardContainerStyle: {
-        borderWidth: 1,
-        borderRadius: 2,
-        borderColor: "#ddd",
-        shadowColor: "#000",
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 2,
-        elevation: 1,
-        marginLeft: 5,
+        marginLeft: 10,
         marginRight: 5,
-        marginTop: 10
+        marginTop: 10,
+
     },
     cardSectionStyle: {
-        padding: 5,
-        backgroundColor: "#fff",
-        borderColor: "#ddd",
-        borderBottomWidth: 1
+        paddingBottom: 15
     },
     imageStyle: {
-        height: 300,
-        width: null
+        height: 200,
+        width: 140
+    },
+    title: {
+        fontFamily: "Roboto",
+        fontSize: 16,
+        fontWeight: "bold",
+        paddingBottom: 5
+    },
+    artist: {
+        color: "gray"
     }
 });
 

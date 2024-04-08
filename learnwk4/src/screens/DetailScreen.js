@@ -1,44 +1,52 @@
 import React from 'react';
 import { StyleSheet, ScrollView, Text, View, Image, Button, Linking } from 'react-native';
-
+import Star from "../components/star"
+import { Center } from '@gluestack-ui/themed';
 const DetailScreen = ({ route }) => {
     const { title,
         artist,
         url,
         image,
-        description, price
+        star,
+        descriptions,
     } = route.params;
     return (
-        <ScrollView>
-            <View>
+        <ScrollView style={styles.ScrollViewstyle}>
+            <View style={styles.container}>
                 <Image
                     style={styles.imageStyle}
                     source={{
                         uri: image
                     }}
                 />
-            </View>
-            <View style={styles.cardContainerStyle}>
-                <Text style={styles.discountStyle} >Discount Now!</Text>
-                <Text style={styles.priceStyle} >Price: ${price}</Text>
-                <Button
-                    onPress={() => Linking.openURL(url)}
-                    title="Buy Now !"
-                />
-            </View>
-            <View style={styles.cardContainerStyle}>
+
+
+
                 <Text>
-                    <Text style={{ fontWeight: 'bold' }}>Artist: </Text>
-                    {artist}
+                    <Text style={styles.title}>{title}</Text>
                 </Text>
                 <Text>
-                    <Text style={{ fontWeight: 'bold' }}>Title: </Text>
-                    {title}
+                    <Text style={styles.artist}>{artist}</Text>
                 </Text>
-                <Text>
-                    <Text style={{ marginTop: 15, fontWeight: 'bold' }}>Descriptions:</Text>
-                    <Text style={{ lineHeight: 18 }}>{'\t'}{description}</Text>
+                <View style={styles.starSection}>
+                    {star ? <Star star={star} /> : null}
+                    {star ? <Text style={styles.score}>
+                        {star}.0 <Text style={styles.scoreNum}>/ 5.0</Text>
+                    </Text> : null}
+                </View>
+                <Text style={styles.descriptionsstyle}>
+                    <Text style={styles.descriptions}>{'\t'}{descriptions}</Text>
                 </Text>
+                <View style={styles.buttonstyle}>
+
+                    <Button style={styles.button}
+                        onPress={() => Linking.openURL(url)}
+                        title="Buy Now For 46.99"
+                        color="#6200EE"
+                        borderRadius="4"
+                    />
+                </View>
+
 
             </View>
         </ScrollView>
@@ -46,34 +54,67 @@ const DetailScreen = ({ route }) => {
 }
 
 const styles = StyleSheet.create({
+    ScrollViewstyle: {
+        backgroundColor: '#fff',
+    },
     container: {
         flex: 1,
-        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
     },
+
     imageStyle: {
-        height: 200,
-        width: null
+        height: 300,
+        width: 210,
+        marginTop: 20,
+        marginBottom: 20
     },
-    cardContainerStyle: {
-        backgroundColor: '#fff',
-        padding: 10,
-        marginHorizontal: 10,
-        marginTop: 10
+    title: {
+        fontSize: 24,
+        fontWeight: '600',
     },
-    discountStyle: {
-        color: '#6099E4',
-        textAlign: 'center',
-        fontSize: 25,
-        fontWeight: 'bold'
+    artist: {
+        fontSize: 14,
+        color: "gray"
+    },
+    starSection: {
+        flexDirection: "row",
+    },
+    score: {
+        marginTop: 10,
+        marginLeft: 10,
+        fontWeight: "500"
+    },
+    scoreNum: {
+        fontWeight: "300"
     },
     priceStyle: {
+        fontFamily: "Roboto",
         fontWeight: 'bold',
         textAlign: 'center',
         fontSize: 40,
         marginVertical: 20,
-    }
+
+    },
+    descriptionsstyle: {
+        marginTop: 10,
+        marginLeft: 50,
+        marginRight: 50,
+        marginBottom: 20,
+        textAlign: "center"
+    },
+    descriptions: {
+        lineHeight: 24,
+        fontFamily: "Roboto",
+        fontSize: 14,
+    },
+    buttonstyle: {
+        width: 200,
+        height: 46,
+
+
+    },
+
 });
 
 export default DetailScreen;

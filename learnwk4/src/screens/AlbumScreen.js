@@ -5,7 +5,7 @@ import albumData from "../json/albums.json"
 
 const AlbumScreen = ({ navigation }) => {
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: "white" }}>
             <Albumlist
                 list={albumData.Albumlist}
                 navigation={navigation}
